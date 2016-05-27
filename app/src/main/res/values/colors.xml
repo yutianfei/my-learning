@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorPrimaryDark">#311B92</color>
+    <color name="colorAccent">#E13E3F</color>
+
+    <color name="colorMainRed">#E13E3F</color>
+    <color name="colorEuroBlue">#2381D8</color>
+    <color name="colorMainBg">#F8F8F8</color>
+    <color name="colorMainDivider">#DEDEDE</color>
+
+    <color name="colorTabMineStatus">#1A2550</color>
+    <color name="colorLoginButton">#ED8A84</color>
+
+    <color name="colorCommonLabel">#333333</color>
+    <color name="colorProtocol">#FF8400</color>
+
+</resources>
