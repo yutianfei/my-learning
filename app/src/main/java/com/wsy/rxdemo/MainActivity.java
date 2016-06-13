@@ -137,7 +137,9 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn_14)
     public void share(View view) {
         UMImage image = new UMImage(MainActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-        new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE)
+        new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
+                SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
+                SHARE_MEDIA.DOUBAN)
                 .withText("来自友盟分享面板")
                 .withMedia(image)
                 .setCallback(umShareListener)
@@ -148,30 +150,30 @@ public class MainActivity extends AppCompatActivity {
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Log.d("plat","platform"+platform);
-            if(platform.name().equals("WEIXIN_FAVORITE")){
-                Toast.makeText(MainActivity.this,platform + " 收藏成功啦",Toast.LENGTH_SHORT).show();
-            }else{
+            Log.d("plat", "platform" + platform);
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(MainActivity.this, platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
                 Toast.makeText(MainActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(MainActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(MainActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
         }
     };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /** attention to this below ,must add this**/
+        /** attention to this below ,must add this **/
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-        Log.d("result","onActivityResult");
+        Log.d("result", "onActivityResult");
     }
 }
