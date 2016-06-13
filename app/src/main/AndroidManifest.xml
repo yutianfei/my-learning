@@ -18,14 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RxTestActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
+        <activity android:name=".RxTestActivity" />
         <activity android:name=".SimpleActivity" />
         <activity android:name=".MoreActivity" />
         <activity android:name=".githubdemo.NetworkActivity" />
@@ -39,6 +32,9 @@
         <activity android:name=".lambda.LambdaActivity" />
         <activity android:name=".rxbus.RxBusActivity" />
         <activity android:name=".rxbus.RxBusNextActivity" />
+        <activity android:name=".mvpdemo.view.LoginActivity" />
+        <activity android:name=".databinding.DataBindingActivity" />
+        <activity android:name=".ProgressBarActivity" />
 
         <service android:name=".backdemo.CustomService" />
     </application>

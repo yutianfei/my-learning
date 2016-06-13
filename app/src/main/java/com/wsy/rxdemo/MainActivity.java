@@ -1,15 +1,21 @@
 package com.wsy.rxdemo;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.umeng.socialize.PlatformConfig;
 import com.wsy.rxdemo.backdemo.BackgroundActivity;
 import com.wsy.rxdemo.cachedemo.RxCacheActivity;
+import com.wsy.rxdemo.databinding.DataBindingActivity;
 import com.wsy.rxdemo.githubdemo.NetworkActivity;
 import com.wsy.rxdemo.lambda.LambdaActivity;
 import com.wsy.rxdemo.moviedemo.MovieTop250Activity;
+import com.wsy.rxdemo.mvpdemo.view.LoginActivity;
 import com.wsy.rxdemo.rxbus.RxBusActivity;
 
 import butterknife.ButterKnife;
@@ -17,11 +23,31 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String[] mPermissionList = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS,
+            Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW,
+            Manifest.permission.GET_ACCOUNTS};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        //微信 appid appsecret
+        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad");
+        //新浪微博 appkey appsecret
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        // QQ和Qzone appid appkey
+        PlatformConfig.setAlipay("2015111700822536");
+        //支付宝 appid
+
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS};
+            requestPermissions(mPermissionList,100);
+        }
     }
 
     // 跳转简单的页面
@@ -83,4 +109,29 @@ public class MainActivity extends AppCompatActivity {
     public void gotoRxBus(View view) {
         startActivity(new Intent(this, RxBusActivity.class));
     }
+
+    // Dagger2
+    @OnClick(R.id.btn_11)
+    public void gotoMVP(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    // Dagger2
+    @OnClick(R.id.btn_12)
+    public void gotoDatabinding(View view) {
+        startActivity(new Intent(this, DataBindingActivity.class));
+    }
+
+    // ProgressBar
+    @OnClick(R.id.btn_13)
+    public void gotoProgressBar(View view) {
+        startActivity(new Intent(this, ProgressBarActivity.class));
+    }
+
+    // 分享
+    @OnClick(R.id.btn_14)
+    public void share(View view) {
+        startActivity(new Intent(this, ProgressBarActivity.class));
+    }
+
 }
