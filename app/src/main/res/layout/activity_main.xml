@@ -16,6 +16,13 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="抓取短信" />
+
+        <Button
             android:id="@+id/btn_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

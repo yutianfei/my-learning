@@ -23,6 +23,7 @@ import com.wsy.rxdemo.lambda.LambdaActivity;
 import com.wsy.rxdemo.moviedemo.MovieTop250Activity;
 import com.wsy.rxdemo.mvpdemo.view.LoginActivity;
 import com.wsy.rxdemo.rxbus.RxBusActivity;
+import com.wsy.rxdemo.sms.SmsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -53,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.GET_ACCOUNTS};
             requestPermissions(mPermissionList, 100);
         }
+    }
+
+    // 跳转简单的页面
+    @OnClick(R.id.btn_0)
+    public void gotoSms(View view) {
+        startActivity(new Intent(this, SmsActivity.class));
     }
 
     // 跳转简单的页面
@@ -121,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    // Dagger2
+    // Databinding
     @OnClick(R.id.btn_12)
     public void gotoDatabinding(View view) {
         startActivity(new Intent(this, DataBindingActivity.class));

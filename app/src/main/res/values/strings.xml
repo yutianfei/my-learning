@@ -7,6 +7,7 @@
     <string name="delay_emit">延迟发送(非旋转)</string>
     <string name="custom_iterator">定制迭代(可旋转)</string>
 
+
     <string-array name="updaterType">
         <item>@string/async_task</item>
         <item>@string/intent_service</item>
