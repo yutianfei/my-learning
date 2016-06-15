@@ -8,7 +8,7 @@ import android.telephony.SmsMessage;
 
 public class MySmsReceiver extends BroadcastReceiver {
 
-    private static final String SMS_RECEIVED_ACTION = "android.provider.Telephony.SMS_RECEIVED";
+    public static final String SMS_RECEIVED_ACTION = "android.provider.Telephony.SMS_RECEIVED";
     private GetMsgListener listener;
 
     public MySmsReceiver(GetMsgListener listener) {
@@ -35,7 +35,7 @@ public class MySmsReceiver extends BroadcastReceiver {
                     phoneNumber.append(temp.getOriginatingAddress());
 
                     // 将信息传递给activity
-                    if(temp.getOriginatingAddress().equals("10086")){
+                    if(temp.getOriginatingAddress().equals("15555215556")){
                         listener.showMsg(temp.getMessageBody());
                     }
                 }

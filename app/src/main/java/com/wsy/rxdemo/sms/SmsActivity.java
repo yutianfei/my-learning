@@ -1,7 +1,9 @@
 package com.wsy.rxdemo.sms;
 
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -31,23 +33,28 @@ public class SmsActivity extends AppCompatActivity implements MySmsReceiver.GetM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
         ButterKnife.bind(this);
+        // 使用广播监听
+        //registerSmsReceiver();
+
+        // 使用ContentObserver注册短信变化监听
+        SmsContent content = new SmsContent(this, new Handler(), editCode);
+        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, content);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        registerSmsReceiver();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterSmsReceiver();
+        //unregisterSmsReceiver();
     }
 
     private void registerSmsReceiver() {
         smsReceiver = new MySmsReceiver(this);
-        IntentFilter intentFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+        IntentFilter intentFilter = new IntentFilter(MySmsReceiver.SMS_RECEIVED_ACTION);
         intentFilter.setPriority(1000);
         registerReceiver(smsReceiver, intentFilter);
     }
