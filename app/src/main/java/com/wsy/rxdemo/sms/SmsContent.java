@@ -17,7 +17,6 @@ public class SmsContent extends ContentObserver {
 
     public SmsContent(Activity activity, Handler handler, EditText verifyText) {
         super(handler);
-        // TODO Auto-generated constructor stub
         this.activity = activity;
         this.verifyText = verifyText;
     }
@@ -33,8 +32,7 @@ public class SmsContent extends ContentObserver {
         if (cursor != null) {// 如果短信为未读模式
             cursor.moveToFirst();
             if (cursor.moveToFirst()) {
-                String smsbody = cursor
-                        .getString(cursor.getColumnIndex("body"));
+                String smsbody = cursor.getString(cursor.getColumnIndex("body"));
                 smsContent = smsbody.split("\\:")[1].substring(0, 6).trim();
                 verifyText.setText(smsContent);
             }
