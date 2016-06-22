@@ -1,1 +1,7 @@
 include ':app'
+include ':mylibrary'
+
+// ShsreSDK
+include ':sharelibrary'
+// Umeng-Share
+include ':usharelibrary'

@@ -131,7 +131,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="?android:attr/selectableItemBackground"
-            android:text="分享" />
+            android:text="ShareSDK分享" />
+
+        <Button
+            android:id="@+id/btn_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="友盟分享" />
 
     </LinearLayout>
 </ScrollView>

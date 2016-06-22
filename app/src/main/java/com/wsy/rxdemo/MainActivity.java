@@ -1,20 +1,14 @@
 package com.wsy.rxdemo;
 
-import android.Manifest;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
-import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.ShareAction;
+import com.sharesdk.library.ShareManager;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.utils.Log;
+import com.ushare.library.UmengShareManager;
 import com.wsy.rxdemo.backdemo.BackgroundActivity;
 import com.wsy.rxdemo.cachedemo.RxCacheActivity;
 import com.wsy.rxdemo.databinding.DataBindingActivity;
@@ -27,6 +21,7 @@ import com.wsy.rxdemo.sms.SmsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sharesdk.framework.ShareSDK;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,24 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //微信 appid appsecret
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
-        //豆瓣RENREN平台目前只能在服务器端配置
-        //新浪微博 appkey appsecret
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad");
-        // QQ和Qzone appid appkey
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        //支付宝 appid
-        PlatformConfig.setAlipay("2015111700822536");
+        // 使用友盟分享初始化
+        // Log.LOG = false;
+        UmengShareManager.setSharePlatform(this);
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            String[] mPermissionList = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS,
-                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW,
-                    Manifest.permission.GET_ACCOUNTS};
-            requestPermissions(mPermissionList, 100);
-        }
+        // 使用ShareSDK初始化
+        ShareSDK.initSDK(this);
     }
 
     // 跳转简单的页面
@@ -140,42 +123,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ProgressBarActivity.class));
     }
 
-    // 分享
+    // ShareSDK分享
     @OnClick(R.id.btn_14)
-    public void share(View view) {
-        UMImage image = new UMImage(MainActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-        new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
-                SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
-                SHARE_MEDIA.DOUBAN)
-                .withText("来自友盟分享面板")
-                .withMedia(image)
-                .setCallback(umShareListener)
-                .withTargetUrl("http://www.umeng.com")
-                .open();
+    public void shareSDK(View view) {
+        ShareManager.showShare(this, null, true);
     }
 
-    private UMShareListener umShareListener = new UMShareListener() {
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-            Log.d("plat", "platform" + platform);
-            if (platform.name().equals("WEIXIN_FAVORITE")) {
-                Toast.makeText(MainActivity.this, platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(MainActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
-            }
-        }
+    // 友盟分享
+    @OnClick(R.id.btn_15)
+    public void umengShare(View view) {
+        new UmengShareManager(this).shareApp();
+    }
 
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(MainActivity.this, platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(MainActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
-        }
-    };
-
+    /**
+     * 友盟分享结果回调
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ShareSDK</string>
+
+    <!-- 分享标题 -->
+    <string name="share_sdk_title">ShareSDK--Title</string>
+    <!-- 分享标题链接 -->
+    <string name="share_sdk_title_url">http://mob.com</string>
+    <!-- 分享内容 -->
+    <string name="share_sdk_content">ShareSDK--文本</string>
+    <!-- 分享内容链接(微信不绕过审核时的分享链接) -->
+    <string name="share_sdk_content_url">http://www.mob.com</string>
+    <!-- 分享图片链接 -->
+    <string name="share_sdk_image_url">http://www.umeng.com/images/pic/social/integrated_3.png</string>
+    <!-- 分享评论(仅在人人网和QQ空间使用) -->
+    <string name="share_sdk_comment">分享</string>
+    <!-- QZone分享完之后返回应用时提示框上显示的名称 -->
+    <string name="share_sdk_site">ShareSDK</string>
+    <!-- QZone分享参数 -->
+    <string name="share_sdk_site_url">http://mob.com</string>
+    <string name="share_sdk_venue_name">ShareSDK</string>
+    <string name="share_sdk_venue_description">This is a beautiful place!</string>
+</resources>
